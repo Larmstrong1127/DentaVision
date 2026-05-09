@@ -1,156 +1,116 @@
 # DentaVision
 
-An AI-powered patient education and treatment planning platform for dental practices. Clinics upload treatment plan images; Claude AI parses them into prioritized, visit-by-visit schedules that patients can view, confirm, and learn about through an AI chat assistant.
+An **AI-powered dental treatment planning platform** that bridges the gap between clinic workflows and patient understanding. Clinics upload treatment plan images; Claude AI parses them into prioritized, visit-by-visit schedules that patients can view and learn about through an interactive AI chat assistant.
 
-**Developer:** Landon Armstrong
-**GitHub:** [Larmstrong1127](https://github.com/Larmstrong1127)
-**Email:** Landon.Armstrong@stmartin.edu
+> **Role:** Full-Stack Developer
+> **Year:** 2025
+> **Stack:** React, Node.js, Express.js, MongoDB, Claude AI (Anthropic), JWT Auth
 
----
+## Overview
+
+DentaVision was built from a real workflow problem - the disconnect between how dental clinics create treatment plans and how patients actually understand and engage with them. The platform automates the translation of raw treatment documents into clear, structured visit schedules with visual tooth charts.
+
+## Features
+
+### Clinic Portal
+- Upload treatment plan images or PDFs for AI parsing
+- AI extracts CDT codes, tooth numbers, and procedure details
+- Auto-generated visit schedule with priority ranking (urgent / moderate / routine)
+- Patient management dashboard with treatment history
+
+### Patient Portal
+- View personalized treatment plan with visit-by-visit breakdown
+- Interactive SVG tooth chart (3 anatomical views: occlusal arch, facial, side profile)
+- Real-time treatment status visualization per tooth
+- AI chat assistant for natural-language questions about procedures and aftercare
+
+### Auth System
+- JWT-based authentication with separate clinic and patient roles
+- Secure clinic code system for patient registration
+- Session persistence with token support
 
 ## Tech Stack
 
 | Layer | Technology |
 |---|---|
-| Frontend | React |
+| Frontend | React 18 |
 | Backend | Node.js, Express.js |
-| Database | MongoDB, MongoDB Atlas, Mongoose |
+| Database | MongoDB Atlas (Mongoose ODM) |
 | AI | Claude AI (Anthropic API) |
-| Auth | JWT Authentication |
-| API Style | REST API |
+| Auth | JWT (jsonwebtoken) |
+| File Handling | Multer (image/PDF upload) |
 
----
-
-## Features
-
-### Clinic Portal
-- Upload treatment plan images directly from the dashboard
-- View patient charts and scan results
-- Monitor treatment confirmation status per patient
-
-### AI Parsing Engine
-- Claude AI reads uploaded treatment plan images
-- Outputs structured, visit-by-visit treatment schedules
-- Prioritizes visits based on clinical urgency
-
-### Patient Portal
-- Interactive SVG tooth chart with 3 anatomical views (buccal, lingual, occlusal)
-- Review and confirm treatment visit schedules
-- AI-powered education chat assistant to ask questions about their treatment
-
-### Authentication
-- JWT-based auth with separate roles for clinics and patients
-- Secure session handling for both portals
-
----
-
-## Project Structure
+## Architecture
 
 ```
-dentavision-v3/
-├── client/         # React frontend
-│   └── src/
-│       ├── components/
-│       ├── context/
-│       ├── pages/
-│       └── utils/
-└── server/         # Express.js backend
-    ├── middleware/
-    ├── models/
-    ├── routes/
-    ├── services/
-    └── index.js
+dentavision/
++-- client/                   # React SPA
+|   +-- src/
+|       +-- pages/
+|       |   +-- clinic/       # Dashboard, ScanPage, PatientDetail
+|       |   +-- patient/      # Home, Treatment, Chat
+|       +-- components/
+|       |   +-- chart/        # ToothChart, ToothDetail (SVG)
+|       |   +-- shared/       # NavBar, ProtectedRoute
+|       +-- utils/            # Axios API client, auth helpers
++-- server/                   # Express API
+    +-- routes/               # scan, clinic, patient, auth endpoints
+    +-- models/               # Mongoose schemas (Clinic, Patient, TreatmentPlan)
+    +-- middleware/            # JWT auth middleware
+    +-- services/             # Claude AI integration, image processing
 ```
 
----
-
-## Setup Instructions
+## How to Run
 
 ### Prerequisites
-- Node.js (v18+)
-- MongoDB Atlas account (or local MongoDB instance)
+- Node.js 18+
+- MongoDB Atlas account (or local MongoDB)
 - Anthropic API key
 
-### 1. Clone the Repository
+### Setup
 
 ```bash
-git clone https://github.com/Larmstrong1127/dentavision-v3.git
-cd dentavision-v3
-```
+# Clone the repo
+git clone https://github.com/Larmstrong1127/DentaVision.git
+cd DentaVision
 
-### 2. Install Dependencies
-
-```bash
-# Install server dependencies
-cd server
+# Install root dependencies
 npm install
 
-# Install client dependencies
+# Server setup
+cd server
+cp .env.example .env
+# Fill in: MONGODB_URI, JWT_SECRET, ANTHROPIC_API_KEY
+npm install
+
+# Client setup
 cd ../client
 npm install
 ```
 
-### 3. Configure Environment Variables
-
-Create a `.env` file inside the `server/` directory:
-
-```env
-ANTHROPIC_API_KEY=your_anthropic_api_key_here
-MONGODB_URI=your_mongodb_atlas_connection_string_here
-JWT_SECRET=your_jwt_secret_here
-PORT=5000
-```
-
-> **Required:** `ANTHROPIC_API_KEY` and `MONGODB_URI` must be set for the application to function.
-
-### 4. Run the Application
-
-Open two terminals:
+### Run
 
 ```bash
-# Terminal 1 — Start the backend server
-cd server
+# From root - starts both client and server
 npm run dev
 
-# Terminal 2 — Start the React frontend
-cd client
-npm run dev
+# Or individually:
+cd server && npm start      # API on port 4000
+cd client && npm start      # React on port 3000
 ```
 
-The client will run on `http://localhost:5173` and the server on `http://localhost:5000` by default.
+## AI Integration
+
+Treatment plan parsing uses **Claude vision** - clinic staff upload an image or PDF of a printed treatment plan, and Claude extracts:
+
+- CDT procedure codes and descriptions
+- Tooth numbers and surfaces affected
+- Recommended visit groupings and sequencing
+- Priority classification (urgent, moderate, routine)
+- Plain-language patient summary
+
+The patient chat assistant uses **Claude conversational API** with treatment plan context injected into the system prompt, enabling accurate, personalized answers about the patient's specific procedures.
 
 ---
 
-## Environment Variables Reference
-
-| Variable | Required | Description |
-|---|---|---|
-| `ANTHROPIC_API_KEY` | Yes | Anthropic Claude API key for AI parsing and chat |
-| `MONGODB_URI` | Yes | MongoDB Atlas connection string |
-| `JWT_SECRET` | Yes | Secret key for signing JWT tokens |
-| `PORT` | No | Server port (defaults to 5000) |
-
----
-
-## User Flows
-
-### Clinic Flow
-1. Register a clinic account
-2. Share your clinic code with patients
-3. Patients register and link to your clinic via code
-4. Upload a photo of a patient's treatment plan
-5. Claude AI parses it and generates the patient's visual schedule
-6. Monitor patient acceptance rates from the dashboard
-
-### Patient Flow
-1. Register with your clinic's code
-2. View your interactive tooth chart
-3. Review your prioritized treatment visit schedule
-4. Confirm planned procedures
-5. Ask dental questions through the AI education chat
-
----
-
-## License
-
-This project is for educational and portfolio purposes.
+**Developer:** Landon Armstrong | [GitHub](https://github.com/Larmstrong1127) | [LinkedIn](https://linkedin.com/in/landon-armstrong)
