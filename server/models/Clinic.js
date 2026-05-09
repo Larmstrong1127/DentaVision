@@ -1,0 +1,58 @@
+const mongoose = require('mongoose');
+const bcrypt = require('bcryptjs');
+const { nanoid } = require('nanoid');
+
+const clinicSchema = new mongoose.Schema({
+  // Auth
+  email: { type: String, required: true, unique: true, lowercase: true, trim: true },
+  password: { type: String, required: true, select: false },
+
+  // Profile
+  name: { type: String, required: true, trim: true },
+  phone: String,
+  address: {
+    street: String,
+    city: String,
+    state: String,
+    zip: String
+  },
+  website: String,
+  logoUrl: String,
+
+  // Registration code patients use to link to this clinic
+  registrationCode: {
+    type: String,
+    default: () => nanoid(8).toUpperCase(),
+    unique: true
+  },
+
+  // Stats (denormalized for fast dashboard queries)
+  stats: {
+    totalPatients: { type: Number, default: 0 },
+    totalScans: { type: Number, default: 0 },
+    acceptedTreatments: { type: Number, default: 0 },
+  },
+
+  isActive: { type: Boolean, default: true },
+  role: { type: String, default: 'clinic' }
+}, { timestamps: true });
+
+// Hash password before save
+clinicSchema.pre('save', async function(next) {
+  if (!this.isModified('password')) return next();
+  this.password = await bcrypt.hash(this.password, 12);
+  next();
+});
+
+clinicSchema.methods.comparePassword = function(candidate) {
+  return bcrypt.compare(candidate, this.password);
+};
+
+// Remove password from JSON output
+clinicSchema.methods.toJSON = function() {
+  const obj = this.toObject();
+  delete obj.password;
+  return obj;
+};
+
+module.exports = mongoose.model('Clinic', clinicSchema);
