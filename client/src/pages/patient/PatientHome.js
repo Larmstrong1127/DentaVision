@@ -118,6 +118,16 @@ export default function PatientHome() {
           </div>
         )}
 
+        {/* Disclaimer strip */}
+        <div style={{
+          marginTop: '8px', marginBottom: '4px', padding: '12px 14px',
+          background: 'var(--surface-2)', border: '1px solid var(--border)',
+          borderRadius: 'var(--r-md)', fontSize: '0.78rem', color: 'var(--ink-tertiary)', lineHeight: '1.55'
+        }}>
+          DentaVision is for informational purposes only and is not a guarantee of required treatment.
+          For questions about your plan, copays, or coverage — contact your clinic or insurance provider directly.
+        </div>
+
         {/* No clinic linked */}
         {!clinic && (
           <div style={{ background: 'var(--watch-bg)', border: '1px solid var(--watch-border)', borderRadius: 'var(--r-lg)', padding: '16px 18px', marginTop: '16px' }}>

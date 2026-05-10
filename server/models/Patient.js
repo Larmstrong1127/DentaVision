@@ -58,6 +58,7 @@ const patientSchema = new mongoose.Schema({
   // Profile
   firstName: { type: String, required: true, trim: true },
   lastName: { type: String, required: true, trim: true },
+  preferredName: { type: String, trim: true },
   dateOfBirth: Date,
   phone: String,
 
@@ -74,10 +75,19 @@ const patientSchema = new mongoose.Schema({
     totalLogins: { type: Number, default: 0 },
     educationTopicsViewed: [String],
     questionsAsked: { type: Number, default: 0 },
-    planViewCount: { type: Number, default: 0 }
+    planViewCount: { type: Number, default: 0 },
+    // Daily question rate limiting for Toothy chat
+    dailyQuestions: { type: Number, default: 0 },
+    questionsDate:  { type: Date },
   },
 
-  role: { type: String, default: 'patient' }
+  role: { type: String, default: 'patient' },
+
+  // Scan rate limiting — max 2 scans per patient per calendar day
+  scanRateLimit: {
+    date:  { type: Date },
+    count: { type: Number, default: 0 }
+  }
 }, { timestamps: true });
 
 patientSchema.pre('save', async function(next) {

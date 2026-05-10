@@ -36,12 +36,13 @@ export default function PatientTreatment() {
       const p = r.data.plans || [];
       setPlans(p);
       if (p.length > 0) {
-        const latest = p[p.length - 1];
-        setActivePlan(latest);
-        setConfirmed(latest.acceptedVisits || []);
+        // Always use the single active plan (index 0)
+        const active = p[0];
+        setActivePlan(active);
+        setConfirmed(active.acceptedVisits || []);
         // Auto-expand all visits initially
         const exp = {};
-        (latest.appointments || []).forEach(a => { exp[a.visitNumber] = true; });
+        (active.appointments || []).forEach(a => { exp[a.visitNumber] = true; });
         setExpanded(exp);
       }
       setLoading(false);
@@ -113,33 +114,13 @@ export default function PatientTreatment() {
               </div>
             )}
 
-            {/* Plan selector (multiple plans) */}
-            {plans.length > 1 && (
-              <div style={{ marginBottom:'20px' }}>
-                <p style={{ fontSize:'0.8125rem', fontWeight:'500', color:'var(--ink-secondary)', marginBottom:'8px' }}>
-                  Treatment plan history
-                </p>
-                <div style={{ display:'flex', gap:'8px', flexWrap:'wrap' }}>
-                  {plans.map((p, i) => (
-                    <button key={p._id} onClick={() => {
-                      setActivePlan(p);
-                      setConfirmed(p.acceptedVisits || []);
-                      setSaved(false);
-                      const exp = {};
-                      (p.appointments || []).forEach(a => { exp[a.visitNumber] = true; });
-                      setExpanded(exp);
-                    }} style={{
-                      padding:'6px 14px', borderRadius:'20px', fontSize:'0.8125rem',
-                      border:`1.5px solid ${activePlan._id === p._id ? 'var(--teal)' : 'var(--border)'}`,
-                      background: activePlan._id === p._id ? 'var(--teal-light)' : 'var(--surface)',
-                      color: activePlan._id === p._id ? 'var(--teal-dark)' : 'var(--ink-secondary)',
-                      cursor:'pointer', fontWeight: activePlan._id === p._id ? '500' : '400'
-                    }}>
-                      Plan {i + 1} — {new Date(p.scanDate).toLocaleDateString()}
-                    </button>
-                  ))}
-                </div>
-              </div>
+            {/* Plan date stamp */}
+            {activePlan.scanDate && (
+              <p style={{ fontSize:'0.78rem', color:'var(--ink-tertiary)', marginBottom:'20px' }}>
+                Plan last updated: {new Date(activePlan.scanDate).toLocaleDateString('en-US', {
+                  year:'numeric', month:'long', day:'numeric'
+                })}
+              </p>
             )}
 
             {appointments.length === 0 ? (
@@ -328,6 +309,29 @@ export default function PatientTreatment() {
             </p>
           </div>
         )}
+
+        {/* Disclaimer */}
+        <div style={{
+          marginTop: '32px', padding: '16px 18px',
+          background: 'var(--surface-2)', border: '1px solid var(--border)',
+          borderRadius: 'var(--r-lg)', fontSize: '0.8125rem',
+          color: 'var(--ink-tertiary)', lineHeight: '1.65'
+        }}>
+          <p style={{ fontWeight: '600', color: 'var(--ink-secondary)', marginBottom: '8px', fontSize: '0.8125rem' }}>
+            📋 Important information
+          </p>
+          <p style={{ marginBottom: '6px' }}>
+            <strong>Coverage &amp; costs:</strong> DentaVision does not display fees or insurance estimates.
+            Contact your clinic directly to discuss your estimated copays and in-network / out-of-network coverage.
+            We also encourage you to contact your insurance provider to review your individual benefits.
+          </p>
+          <p>
+            <strong>Treatment decisions:</strong> This plan is for informational purposes only.
+            DentaVision is not a guarantee of required treatment. Your dental provider is the best person
+            to guide your care. Please contact your clinic with any questions about your plan.
+          </p>
+        </div>
+
       </main>
     </div>
   );

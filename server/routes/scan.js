@@ -27,6 +27,19 @@ router.post('/plan', authenticate, requireClinic, upload.single('plan'), async (
     const patient = await Patient.findOne({ _id: patientId, clinicId: req.clinic._id });
     if (!patient) return res.status(404).json({ error: 'Patient not found in your clinic' });
 
+    // ── Rate limit: max 2 scans per patient per calendar day ─
+    const todayStart = new Date();
+    todayStart.setHours(0, 0, 0, 0);
+    const rl = patient.scanRateLimit || {};
+    const isToday = rl.date && new Date(rl.date) >= todayStart;
+    const scanCountToday = isToday ? (rl.count || 0) : 0;
+
+    if (scanCountToday >= 2) {
+      return res.status(429).json({
+        error: 'Daily scan limit reached for this patient. A patient\'s plan can only be updated twice per day. Please try again tomorrow.'
+      });
+    }
+
     let imageBase64 = null;
     let mimeType = 'image/jpeg';
 
@@ -50,8 +63,15 @@ router.post('/plan', authenticate, requireClinic, upload.single('plan'), async (
       status: 'complete'
     };
 
-    // Save to patient record
-    patient.treatmentPlans.push(plan);
+    // ── Replace (not append) — patient always has exactly one active plan ─
+    patient.treatmentPlans = [plan];
+
+    // ── Update rate limit counter ─────────────────────────────
+    patient.scanRateLimit = {
+      date:  new Date(),
+      count: scanCountToday + 1
+    };
+
     await patient.save();
 
     // Update clinic stats
@@ -59,17 +79,47 @@ router.post('/plan', authenticate, requireClinic, upload.single('plan'), async (
       $inc: { 'stats.totalScans': 1 }
     });
 
-    const savedPlan = patient.treatmentPlans[patient.treatmentPlans.length - 1];
+    const savedPlan = patient.treatmentPlans[0];
 
     res.json({
       success: true,
       planId: savedPlan._id,
       plan: savedPlan,
-      patientName: patient.fullName
+      patientName: patient.fullName,
+      scansRemainingToday: 2 - (scanCountToday + 1)
     });
   } catch (err) {
     console.error('Scan error:', err);
     res.status(500).json({ error: err.message || 'Scan failed. Please try again.' });
+  }
+});
+
+// ── Check patient scan status (for clinic UI pre-submit warning) ─
+// GET /api/scan/patient-status/:patientId
+router.get('/patient-status/:patientId', authenticate, requireClinic, async (req, res) => {
+  try {
+    const patient = await Patient.findOne({
+      _id: req.params.patientId,
+      clinicId: req.clinic._id
+    }).select('firstName lastName treatmentPlans scanRateLimit');
+
+    if (!patient) return res.status(404).json({ error: 'Patient not found' });
+
+    const todayStart = new Date();
+    todayStart.setHours(0, 0, 0, 0);
+    const rl = patient.scanRateLimit || {};
+    const isToday = rl.date && new Date(rl.date) >= todayStart;
+    const scanCountToday = isToday ? (rl.count || 0) : 0;
+
+    res.json({
+      hasPlan: patient.treatmentPlans.length > 0,
+      lastScanDate: patient.treatmentPlans[0]?.scanDate || null,
+      scansUsedToday: scanCountToday,
+      scansRemainingToday: Math.max(0, 2 - scanCountToday),
+      patientName: `${patient.firstName} ${patient.lastName}`
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
