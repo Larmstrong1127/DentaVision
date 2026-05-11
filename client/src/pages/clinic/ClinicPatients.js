@@ -158,11 +158,11 @@ export default function ClinicPatients() {
               icon="📋"
             />
             <StatCard
-              label="Urgent attention"
+              label="Needs attention"
               value={analytics.withUrgent}
-              sub={analytics.withUrgent > 0 ? 'patients need priority care' : 'No urgent items'}
+              sub={analytics.withUrgent > 0 ? 'patients need priority care' : 'No priority cases'}
               accent={analytics.withUrgent > 0 ? 'var(--urgent)' : undefined}
-              icon="⚠️"
+              icon="🔔"
             />
             <StatCard
               label="Plan engagement"
@@ -336,7 +336,7 @@ export default function ClinicPatients() {
             <p style={{ fontSize: '0.875rem', color: 'var(--ink-tertiary)', maxWidth: '340px', margin: '0 auto' }}>
               {hasQuery
                 ? 'Try adjusting your search — results match on any field.'
-                : 'Share your clinic registration code with patients so they can link their accounts.'}
+                : 'Share your clinic registration code with patients so they can connect to your clinic.'}
             </p>
             {hasQuery && (
               <button onClick={handleClear} className="btn btn-ghost btn-sm" style={{ marginTop: '16px' }}>

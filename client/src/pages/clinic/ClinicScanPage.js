@@ -550,8 +550,8 @@ function ConfirmModal({ patientName, patientStatus, onConfirm, onCancel, loading
                 {formattedDate && <> (last updated <strong>{formattedDate}</strong>)</>}.
               </p>
               <p>
-                Submitting will <strong>permanently replace</strong> their current plan.
-                Only proceed if this is the most up-to-date version of their treatment plan.
+                Submitting will replace their current plan with this one.
+                Only proceed if this reflects the most up-to-date version of their treatment.
               </p>
             </>
           ) : (

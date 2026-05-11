@@ -49,9 +49,9 @@ export default function PatientHome() {
             {urgentCount > 0 && (
               <div style={{ background: 'var(--urgent-bg)', border: '1px solid var(--urgent-border)', borderRadius: 'var(--r-lg)', padding: '16px 18px', marginBottom: '16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
-                  <p style={{ fontWeight: '600', color: 'var(--urgent)', marginBottom: '2px' }}>⚠ Attention needed</p>
+                  <p style={{ fontWeight: '600', color: 'var(--urgent)', marginBottom: '2px' }}>Your dentist flagged some items</p>
                   <p style={{ fontSize: '0.875rem', color: 'var(--ink-secondary)' }}>
-                    {urgentCount} urgent item{urgentCount !== 1 ? 's' : ''} on your latest treatment plan
+                    {urgentCount} item{urgentCount !== 1 ? 's' : ''} on your plan {urgentCount !== 1 ? 'are' : 'is'} marked as priority
                   </p>
                 </div>
                 <Link to="/my/treatment" className="btn btn-sm" style={{ background: 'var(--urgent)', color: 'white', border: 'none' }}>View →</Link>
@@ -107,10 +107,10 @@ export default function PatientHome() {
           <div className="card" style={{ textAlign: 'center', padding: '50px 20px' }}>
             <p style={{ fontSize: '2.5rem', marginBottom: '14px' }}>🦷</p>
             <h2 style={{ fontFamily: 'var(--font-sans)', fontWeight: '600', fontSize: '1.1rem', marginBottom: '8px' }}>
-              No treatment plans yet
+              No treatment plan yet
             </h2>
             <p style={{ fontSize: '0.9rem', color: 'var(--ink-secondary)', lineHeight: '1.6', maxWidth: '320px', margin: '0 auto 20px' }}>
-              Ask your dental office to scan your treatment plan into DentaVision, or make sure you've entered your clinic code.
+              Your clinic will add your treatment plan after your next appointment. Once it's ready, you'll see everything here.
             </p>
             {!clinic && (
               <Link to="/my" className="btn btn-secondary btn-sm">Add clinic code</Link>
@@ -124,8 +124,8 @@ export default function PatientHome() {
           background: 'var(--surface-2)', border: '1px solid var(--border)',
           borderRadius: 'var(--r-md)', fontSize: '0.78rem', color: 'var(--ink-tertiary)', lineHeight: '1.55'
         }}>
-          DentaVision is for informational purposes only and is not a guarantee of required treatment.
-          For questions about your plan, copays, or coverage — contact your clinic or insurance provider directly.
+          This information is meant to help you understand your care — not replace your dentist's guidance.
+          For questions about costs or coverage, reach out to your clinic or insurance provider.
         </div>
 
         {/* No clinic linked */}

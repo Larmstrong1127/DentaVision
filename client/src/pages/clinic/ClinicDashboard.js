@@ -117,10 +117,10 @@ export default function ClinicDashboard() {
             accent="var(--teal)"
           />
           <StatCard
-            icon="⚠️"
-            label="Urgent attention"
+            icon="🔔"
+            label="Needs attention"
             value={withUrgent}
-            sub={withUrgent === 0 ? 'No urgent cases' : `${withUrgent} patient${withUrgent !== 1 ? 's need' : ' needs'} follow-up`}
+            sub={withUrgent === 0 ? 'No priority cases' : `${withUrgent} patient${withUrgent !== 1 ? 's need' : ' needs'} follow-up`}
             accent={urgentAccent}
           />
           <StatCard
@@ -157,8 +157,8 @@ export default function ClinicDashboard() {
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '7px' }}>
               {[
-                { label: 'With urgent findings', count: withUrgent, color: 'var(--urgent)' },
-                { label: 'With active plan', count: withPlan, color: 'var(--teal)' },
+                { label: 'Need priority care', count: withUrgent, color: 'var(--urgent)' },
+                { label: 'Have an active plan', count: withPlan, color: 'var(--teal)' },
                 { label: 'No plan yet', count: totalPatients - withPlan, color: 'var(--ink-tertiary)' },
               ].map(row => (
                 <div key={row.label} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
@@ -184,9 +184,9 @@ export default function ClinicDashboard() {
               <span style={{ fontSize: '0.8125rem', color: 'var(--ink-tertiary)', paddingBottom: '4px' }}>of recommended items</span>
             </div>
             <p style={{ fontSize: '0.78rem', color: 'var(--ink-tertiary)' }}>
-              {acceptanceRate >= 60 ? 'Strong engagement with recommendations' :
-               acceptanceRate >= 30 ? 'Moderate acceptance — room to improve' :
-               totalPatients === 0 ? 'No data yet' : 'Low acceptance — consider patient outreach'}
+              {acceptanceRate >= 60 ? 'Patients are reviewing and confirming their plans' :
+               acceptanceRate >= 30 ? 'Some patients haven\'t reviewed their plan yet' :
+               totalPatients === 0 ? 'No data yet' : 'Consider following up with patients about their plans'}
             </p>
           </div>
         </div>
@@ -223,10 +223,10 @@ export default function ClinicDashboard() {
                 onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = 'var(--shadow-md)'; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = ''; }}
               >
-                <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>🚨</div>
-                <p style={{ fontWeight: '500', marginBottom: '4px', color: 'var(--urgent)' }}>Urgent follow-ups</p>
+                <div style={{ fontSize: '1.5rem', marginBottom: '8px' }}>🔔</div>
+                <p style={{ fontWeight: '500', marginBottom: '4px', color: 'var(--urgent)' }}>Follow-up needed</p>
                 <p style={{ fontSize: '0.8125rem', color: 'var(--urgent)', opacity: 0.8 }}>
-                  {withUrgent} patient{withUrgent !== 1 ? 's require' : ' requires'} attention
+                  {withUrgent} patient{withUrgent !== 1 ? 's have' : ' has'} priority items
                 </p>
               </div>
             </Link>

@@ -135,7 +135,7 @@ export default function PatientTreatment() {
                 <div style={{ display:'grid', gridTemplateColumns:'repeat(2,1fr)', gap:'12px', marginBottom:'24px' }}>
                   {[
                     { label:'Total visits', value: totalVisits },
-                    { label:'Urgent visits', value: urgentCount, warn: urgentCount > 0 },
+                    { label:'Priority visits', value: urgentCount, warn: urgentCount > 0 },
                   ].map(s => (
                     <div key={s.label} className="card" style={{ textAlign:'center', padding:'16px 12px' }}>
                       <p style={{ fontSize:'1.4rem', fontWeight:'700',
@@ -219,7 +219,7 @@ export default function PatientTreatment() {
                             padding:'12px 20px 16px' }}>
                             <p style={{ fontSize:'0.75rem', fontWeight:'600', color:'var(--ink-tertiary)',
                               textTransform:'uppercase', letterSpacing:'0.5px', marginBottom:'10px' }}>
-                              Procedures in this visit
+                              What's included
                             </p>
                             <div style={{ display:'flex', flexDirection:'column', gap:'8px' }}>
                               {appt.procedures.map((proc, pi) => (
@@ -286,7 +286,7 @@ export default function PatientTreatment() {
                       <p style={{ fontSize:'0.72rem', color:'var(--ink-tertiary)', marginBottom:'2px' }}>Status</p>
                       <p style={{ fontWeight:'600', fontSize:'0.875rem',
                         color: saved ? 'var(--healthy)' : 'var(--ink-secondary)' }}>
-                        {saved ? '✓ Shared with clinic' : 'Not yet saved'}
+                        {saved ? '✓ Shared with clinic' : 'Ready to share'}
                       </p>
                     </div>
                   </div>
@@ -317,19 +317,8 @@ export default function PatientTreatment() {
           borderRadius: 'var(--r-lg)', fontSize: '0.8125rem',
           color: 'var(--ink-tertiary)', lineHeight: '1.65'
         }}>
-          <p style={{ fontWeight: '600', color: 'var(--ink-secondary)', marginBottom: '8px', fontSize: '0.8125rem' }}>
-            📋 Important information
-          </p>
-          <p style={{ marginBottom: '6px' }}>
-            <strong>Coverage &amp; costs:</strong> DentaVision does not display fees or insurance estimates.
-            Contact your clinic directly to discuss your estimated copays and in-network / out-of-network coverage.
-            We also encourage you to contact your insurance provider to review your individual benefits.
-          </p>
-          <p>
-            <strong>Treatment decisions:</strong> This plan is for informational purposes only.
-            DentaVision is not a guarantee of required treatment. Your dental provider is the best person
-            to guide your care. Please contact your clinic with any questions about your plan.
-          </p>
+          This information is meant to help you understand your care — not replace your dentist's guidance.
+          For questions about costs, copays, or coverage, reach out to your clinic or insurance provider directly.
         </div>
 
       </main>
