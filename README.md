@@ -6,7 +6,7 @@ An **AI-powered dental treatment planning platform** that bridges the gap betwee
 **GitHub:** [Larmstrong1127](https://github.com/Larmstrong1127)
 **Email:** Landon.Armstrong@stmartin.edu
 
-> 🚀 **[Live Demo →](https://dentavision.vercel.app)**
+> 🚀 **[Live Demo →](https://denta-vision.vercel.app)**
 
 ---
 
