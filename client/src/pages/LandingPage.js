@@ -15,6 +15,7 @@ export default function LandingPage() {
         </div>
         <div style={{ display:'flex', gap:'12px', alignItems:'center' }}>
           <Link to="/login" className="btn btn-ghost btn-sm">Sign in</Link>
+          <Link to="/request-demo" className="btn btn-secondary btn-sm">Request a Demo</Link>
           <Link to="/register/clinic" className="btn btn-primary btn-sm">Start free trial</Link>
         </div>
       </nav>
@@ -34,6 +35,9 @@ export default function LandingPage() {
         <div style={{ display:'flex', gap:'12px', justifyContent:'center', flexWrap:'wrap' }}>
           <Link to="/register/clinic" className="btn btn-primary btn-lg">
             Start 14-day free trial →
+          </Link>
+          <Link to="/request-demo" className="btn btn-secondary btn-lg">
+            Request a Demo
           </Link>
           <Link to="/register/patient" className="btn btn-ghost btn-lg">
             I'm a patient

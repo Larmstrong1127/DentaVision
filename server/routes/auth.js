@@ -40,6 +40,12 @@ router.post('/clinic/login', async (req, res) => {
     if (!clinic || !(await clinic.comparePassword(password))) {
       return res.status(401).json({ error: 'Invalid email or password' });
     }
+    if (clinic.status === 'pending') {
+      return res.status(403).json({ error: 'Your clinic account is pending admin approval. You will receive an email when approved.', status: 'pending' });
+    }
+    if (clinic.status === 'rejected') {
+      return res.status(403).json({ error: 'Your clinic application was not approved. Contact support@dentavision.app', status: 'rejected' });
+    }
     const token = signToken(clinic._id, 'clinic');
     res.json({ token, user: clinic });
   } catch (err) {

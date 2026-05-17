@@ -34,7 +34,26 @@ const clinicSchema = new mongoose.Schema({
   },
 
   isActive: { type: Boolean, default: true },
-  role: { type: String, default: 'clinic' }
+  role: { type: String, default: 'clinic' },
+
+  // Provider info
+  npi: { type: String, trim: true },
+  providerCount: { type: Number, default: 1 },
+
+  // Approval workflow
+  status: { type: String, enum: ['pending', 'approved', 'rejected'], default: 'pending' },
+  isAdmin: { type: Boolean, default: false },
+  adminNotes: { type: String },
+
+  // Subscription
+  subscription: {
+    plan: { type: String, enum: ['trial', 'starter', 'growth'], default: 'trial' },
+    status: { type: String, enum: ['trial', 'active', 'past_due', 'canceled'], default: 'trial' },
+    stripeCustomerId: String,
+    stripeSubscriptionId: String,
+    currentPeriodEnd: Date,
+    trialEndsAt: { type: Date, default: () => new Date(Date.now() + 14 * 24 * 60 * 60 * 1000) }
+  },
 }, { timestamps: true });
 
 // Hash password before save
@@ -46,6 +65,12 @@ clinicSchema.pre('save', async function(next) {
 
 clinicSchema.methods.comparePassword = function(candidate) {
   return bcrypt.compare(candidate, this.password);
+};
+
+clinicSchema.methods.isSubscriptionActive = function() {
+  if (this.subscription.status === 'active') return true;
+  if (this.subscription.status === 'trial' && this.subscription.trialEndsAt > new Date()) return true;
+  return false;
 };
 
 // Remove password from JSON output

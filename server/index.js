@@ -10,6 +10,9 @@ const clinicRoutes = require('./routes/clinics');
 const patientRoutes = require('./routes/patients');
 const scanRoutes = require('./routes/scan');
 const educationRoutes = require('./routes/education');
+const billingRoutes = require('./routes/billing');
+const adminRoutes = require('./routes/admin');
+const consultationRoutes = require('./routes/consultations');
 
 const app = express();
 
@@ -31,6 +34,9 @@ app.use(cors({
   },
   credentials: true
 }));
+
+// Raw body required for Stripe webhook — must be before express.json()
+app.use('/api/billing/webhook', express.raw({ type: 'application/json' }));
 
 app.use(express.json({ limit: '10mb' }));
 
@@ -65,6 +71,9 @@ app.use('/api/clinics', clinicRoutes);
 app.use('/api/patients', patientRoutes);
 app.use('/api/scan', scanRoutes);
 app.use('/api/education', educationRoutes);
+app.use('/api/billing', billingRoutes);
+app.use('/api/admin', adminRoutes);
+app.use('/api/consultations', consultationRoutes);
 
 // ── Health check ──────────────────────────────────────────
 app.get('/api/health', (req, res) => res.json({ status: 'ok', timestamp: new Date() }));

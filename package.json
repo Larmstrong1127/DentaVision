@@ -11,6 +11,8 @@
     "build": "cd client && npm run build"
   },
   "devDependencies": {
-    "concurrently": "^8.2.0"
+    "axios": "^1.16.0",
+    "concurrently": "^8.2.0",
+    "puppeteer": "^24.43.0"
   }
 }
