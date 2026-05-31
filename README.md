@@ -1,6 +1,6 @@
 # DentaVision
 
-[![CI](https://github.com/Larmstrong1127/DentaVision/actions/workflows/ci.yml/badge.svg)](https://github.com/Larmstrong1127/DentaVision/actions/workflows/ci.yml)
+[![CI/CD](https://github.com/Larmstrong1127/DentaVision/actions/workflows/ci.yml/badge.svg)](https://github.com/Larmstrong1127/DentaVision/actions/workflows/ci.yml)
 
 An **AI-powered dental treatment planning platform** that bridges the gap between clinic workflows and patient understanding. Clinics upload treatment plan images; Claude AI parses them into prioritized, visit-by-visit schedules that patients can review, confirm, and ask questions about.
 
@@ -57,6 +57,24 @@ An **AI-powered dental treatment planning platform** that bridges the gap betwee
 | Auth | JWT — separate clinic and patient roles |
 | File Handling | Multer (image/PDF upload) |
 | Deployment | Vercel (frontend) · Render (backend) |
+| CI/CD | GitHub Actions — tests + build + deploy on every push |
+| Testing | Jest + Supertest — 20 tests covering auth, JWT, and API routes |
+
+---
+
+## CI/CD Pipeline
+
+Every push to `main` triggers a 3-stage GitHub Actions pipeline:
+
+```
+Push → [Server Tests (Jest)] + [Client Build] → Deploy to Production
+                                                  ├── Backend → Render (via API)
+                                                  └── Frontend → Vercel (auto-deploy)
+```
+
+- **Tests must pass** before any deployment runs
+- **20 Jest + Supertest tests** cover clinic/patient auth, JWT validation, and API routes
+- **Parallel CI jobs** keep feedback fast
 
 ---
 
