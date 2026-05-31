@@ -1,5 +1,7 @@
 # DentaVision
 
+[![CI](https://github.com/Larmstrong1127/DentaVision/actions/workflows/ci.yml/badge.svg)](https://github.com/Larmstrong1127/DentaVision/actions/workflows/ci.yml)
+
 An **AI-powered dental treatment planning platform** that bridges the gap between clinic workflows and patient understanding. Clinics upload treatment plan images; Claude AI parses them into prioritized, visit-by-visit schedules that patients can review, confirm, and ask questions about.
 
 **Developer:** Landon Armstrong
