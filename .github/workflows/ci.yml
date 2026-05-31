@@ -76,11 +76,15 @@ jobs:
       - name: Deploy backend to Render
         run: |
           echo "Triggering Render backend deploy..."
-          STATUS=$(curl -s -o /dev/null -w "%{http_code}" -X POST "${{ secrets.RENDER_DEPLOY_HOOK }}")
-          if [ "$STATUS" -eq 200 ] || [ "$STATUS" -eq 201 ]; then
-            echo "✅ Backend deploy triggered (HTTP $STATUS)"
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{"clearCache":"do_not_clear"}')
+          if [ "$STATUS" -eq 201 ] || [ "$STATUS" -eq 202 ]; then
+            echo "✅ Backend deploy triggered on Render (HTTP $STATUS)"
           else
-            echo "❌ Render deploy hook returned HTTP $STATUS"
+            echo "❌ Render API returned HTTP $STATUS"
             exit 1
           fi
 
