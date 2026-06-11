@@ -9,6 +9,14 @@ const router = express.Router();
 const signToken = (id, role) =>
   jwt.sign({ id, role }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_IN || '7d' });
 
+// Never send the password hash to the client, even though the schema
+// excludes it by default — register/login docs still carry it in memory
+const stripPassword = (doc) => {
+  const obj = doc.toObject ? doc.toObject() : { ...doc };
+  delete obj.password;
+  return obj;
+};
+
 // ── Clinic registration ───────────────────────────────────
 router.post('/clinic/register', async (req, res) => {
   try {
@@ -24,7 +32,7 @@ router.post('/clinic/register', async (req, res) => {
 
     res.status(201).json({
       token,
-      user: clinic,
+      user: stripPassword(clinic),
       message: `Welcome to DentaVision! Your clinic registration code is: ${clinic.registrationCode}`
     });
   } catch (err) {
@@ -47,7 +55,7 @@ router.post('/clinic/login', async (req, res) => {
       return res.status(403).json({ error: 'Your clinic application was not approved. Contact support@dentavision.app', status: 'rejected' });
     }
     const token = signToken(clinic._id, 'clinic');
-    res.json({ token, user: clinic });
+    res.json({ token, user: stripPassword(clinic) });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -79,7 +87,7 @@ router.post('/patient/register', async (req, res) => {
     });
 
     const token = signToken(patient._id, 'patient');
-    res.status(201).json({ token, user: patient });
+    res.status(201).json({ token, user: stripPassword(patient) });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -99,7 +107,7 @@ router.post('/patient/login', async (req, res) => {
       $set: { 'engagement.lastLogin': new Date() }
     });
     const token = signToken(patient._id, 'patient');
-    res.json({ token, user: patient });
+    res.json({ token, user: stripPassword(patient) });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
