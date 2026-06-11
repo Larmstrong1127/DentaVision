@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const mongoSanitize = require('express-mongo-sanitize');
 
 const authRoutes = require('./routes/auth');
 const clinicRoutes = require('./routes/clinics');
@@ -37,6 +38,9 @@ app.use('/api/billing/webhook', express.raw({ type: 'application/json' }));
 
 app.use(express.json({ limit: '10mb' }));
 
+// Strip $ and . operators from user input to prevent NoSQL injection
+app.use(mongoSanitize());
+
 // ── Rate limiting ─────────────────────────────────────────
 const isDev = process.env.NODE_ENV !== 'production';
 const limiter = rateLimit({
@@ -52,8 +56,17 @@ const scanLimiter = rateLimit({
   standardHeaders: true,
   legacyHeaders: false,
 });
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: isDev ? 500 : 10,
+  message: 'Too many login attempts. Try again in 15 minutes.',
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 app.use('/api/', limiter);
 app.use('/api/scan', scanLimiter);
+app.use('/api/auth/clinic/login', loginLimiter);
+app.use('/api/auth/patient/login', loginLimiter);
 
 // ── Routes ────────────────────────────────────────────────
 app.use('/api/auth', authRoutes);
