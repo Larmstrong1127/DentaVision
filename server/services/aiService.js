@@ -159,7 +159,7 @@ PARSING RULES:
   }
 
   const response = await client.messages.create({
-    model: 'claude-opus-4-6',
+    model: 'claude-opus-4-8',
     max_tokens: 3000,
     messages
   });
@@ -232,7 +232,7 @@ function priorityRank(p) {
  */
 async function explainProcedure(procedureName, toothNumber, patientContext = '') {
   const response = await client.messages.create({
-    model: 'claude-opus-4-6',
+    model: 'claude-opus-4-8',
     max_tokens: 600,
     messages: [{
       role: 'user',
