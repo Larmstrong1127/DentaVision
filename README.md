@@ -2,13 +2,36 @@
 
 [![CI/CD](https://github.com/Larmstrong1127/DentaVision/actions/workflows/ci.yml/badge.svg)](https://github.com/Larmstrong1127/DentaVision/actions/workflows/ci.yml)
 
-An **AI-powered dental treatment planning platform** that bridges the gap between clinic workflows and patient understanding. Clinics upload treatment plan images; Claude AI parses them into prioritized, visit-by-visit schedules that patients can review, confirm, and ask questions about.
+An **AI-powered dental treatment planning platform** that bridges the gap between clinic workflows and patient understanding. Clinics upload treatment plan images; Claude AI parses them into prioritized, visit-by-visit schedules that patients can review, confirm, and ask questions about. **This is a demo product — see the PHI notice below before using it with any real data.**
 
 **Developer:** Landon Armstrong
 **GitHub:** [Larmstrong1127](https://github.com/Larmstrong1127)
 **Email:** Landon.Armstrong@stmartin.edu
 
 > 🚀 **[Live Demo →](https://denta-vision.vercel.app)**
+
+---
+
+## ⚠️ Demo only — do not upload real patient information (PHI)
+
+DentaVision is a demonstration and portfolio project. It is **not** cleared for
+use with real patient data.
+
+- Treatment plans are **Protected Health Information (PHI)** under HIPAA.
+- A dental practice is a **covered entity** and may not disclose PHI to a
+  vendor without a signed **Business Associate Agreement (BAA)**.
+- **No BAA process exists for DentaVision**, and the codebase implements no
+  HIPAA safeguard programme — no audit logging, no encryption-at-rest
+  guarantees, no breach-notification process, no workforce training controls.
+- Uploaded content is transmitted to the **Anthropic Claude API** for parsing.
+
+Use the synthetic plans in [`samples/treatment-plans/`](samples/treatment-plans/)
+— or your own clearly fictional data — for every demo, screenshot, and test.
+Do not commit real treatment plans to this repository, even redacted.
+
+If DentaVision is ever taken to production with real patients, that work must
+start with a BAA, a risk analysis, and an actual safeguard implementation —
+not with copy changes.
 
 ---
 
@@ -24,7 +47,7 @@ An **AI-powered dental treatment planning platform** that bridges the gap betwee
 
 ![Clinic Patients](docs/screenshots/04-clinic-patients.png)
 
-**Scan Plan** — upload a treatment plan image or PDF for AI parsing, or enter procedures manually
+**Scan Plan** — upload a sample treatment plan image or PDF for AI parsing, or enter procedures manually (synthetic data only)
 
 ![Scan Plan](docs/screenshots/05-clinic-scan.png)
 
@@ -81,7 +104,7 @@ Push → [Server Tests (Jest)] + [Client Build] → Deploy to Production
 ## Features
 
 ### Clinic Side
-- **AI Scan** — upload a photo or PDF of a printed treatment plan; Claude extracts CDT codes, tooth numbers, surfaces, and procedure notes
+- **AI Scan** — upload a photo or PDF of a printed treatment plan (synthetic samples only — see the PHI notice above); Claude extracts CDT codes, tooth numbers, surfaces, and procedure notes
 - **Visit Scheduling** — AI auto-groups procedures into prioritized visit sequences (urgent → moderate → routine)
 - **Dashboard** — patient count, plan coverage rate, engagement metrics, recently registered patients
 - **Patient Search** — filter by name, DOB, or email with live debounced results
