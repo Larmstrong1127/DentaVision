@@ -1,0 +1,48 @@
+SYNTHETIC SAMPLE — NOT A REAL PATIENT. FOR DENTAVISION DEMO USE ONLY.
+
+SUNRISE HOLLOW DENTAL (fictional practice)
+TREATMENT PLAN
+
+Patient:      Bramwell Oakhurst
+Chart #:      SAMPLE-0002
+Date of Birth: 11/30/1962   (invented)
+Plan Date:    Sample data — no real appointment
+Provider:     Dr. Wren Featherstone, DDS (fictional)
+
+--------------------------------------------------------------
+VISIT 1 — Endodontic (urgent priority)
+--------------------------------------------------------------
+Tooth #19  D3330   Endodontic therapy, molar
+                   Note: symptomatic, patient reports lingering
+                         sensitivity to heat
+
+Tooth #19  D2950   Core buildup, including any pins
+                   Note: required before crown prep
+
+--------------------------------------------------------------
+VISIT 2 — Crown delivery (urgent priority)
+--------------------------------------------------------------
+Tooth #19  D2740   Crown, porcelain / ceramic
+                   Note: seat approximately three weeks after endo
+
+--------------------------------------------------------------
+VISIT 3 — Restorative quadrant (moderate priority)
+--------------------------------------------------------------
+Tooth #20  D2392   Resin composite, two surfaces, posterior
+                   Surfaces: mesial, occlusal
+
+Tooth #21  D2391   Resin composite, one surface, posterior
+                   Surfaces: occlusal
+
+Tooth #18  D2393   Resin composite, three surfaces, posterior
+                   Surfaces: mesial, occlusal, distal
+                   Note: existing restoration failing at margin
+
+--------------------------------------------------------------
+NOTES FOR THE PATIENT
+--------------------------------------------------------------
+One back tooth needs a root canal and a crown — that comes first because
+it is the source of the discomfort. Three fillings on the same side follow
+once the crown is seated.
+
+SYNTHETIC SAMPLE — NOT A REAL PATIENT.

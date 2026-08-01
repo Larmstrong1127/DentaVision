@@ -1,0 +1,37 @@
+SYNTHETIC SAMPLE — NOT A REAL PATIENT. FOR DENTAVISION DEMO USE ONLY.
+
+SUNRISE HOLLOW DENTAL (fictional practice)
+TREATMENT PLAN
+
+Patient:      Avery Nightingale
+Chart #:      SAMPLE-0001
+Date of Birth: 04/12/1988   (invented)
+Plan Date:    Sample data — no real appointment
+Provider:     Dr. Wren Featherstone, DDS (fictional)
+
+--------------------------------------------------------------
+VISIT 1 — Restorative (moderate priority)
+--------------------------------------------------------------
+Tooth #3   D2392   Resin composite, two surfaces, posterior
+                   Surfaces: occlusal, distal
+                   Note: moderate decay noted on bitewing
+
+Tooth #14  D2391   Resin composite, one surface, posterior
+                   Surfaces: occlusal
+                   Note: early lesion, shallow prep expected
+
+--------------------------------------------------------------
+VISIT 2 — Recall / preventive (routine priority)
+--------------------------------------------------------------
+Tooth N/A  D1110   Prophylaxis, adult
+Tooth N/A  D0274   Bitewings, four radiographic images
+Tooth #30  D0140   Limited evaluation — watch area
+                   Note: no treatment yet; re-evaluate at recall
+
+--------------------------------------------------------------
+NOTES FOR THE PATIENT
+--------------------------------------------------------------
+Two small fillings, then a regular cleaning. One back tooth is being
+watched rather than treated. Nothing here is urgent.
+
+SYNTHETIC SAMPLE — NOT A REAL PATIENT.

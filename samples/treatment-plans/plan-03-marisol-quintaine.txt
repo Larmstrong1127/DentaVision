@@ -1,0 +1,50 @@
+SYNTHETIC SAMPLE — NOT A REAL PATIENT. FOR DENTAVISION DEMO USE ONLY.
+
+SUNRISE HOLLOW DENTAL (fictional practice)
+TREATMENT PLAN
+
+Patient:      Marisol Quintaine
+Chart #:      SAMPLE-0003
+Date of Birth: 07/19/1975   (invented)
+Plan Date:    Sample data — no real appointment
+Provider:     Thessaly Marchbanks, RDH (fictional)
+
+--------------------------------------------------------------
+VISIT 1 — Periodontal therapy, right side (urgent priority)
+--------------------------------------------------------------
+Tooth #1-8   D4341  Periodontal scaling and root planing,
+                    four or more teeth per quadrant
+                    Note: upper right quadrant, 5-6mm pocketing
+
+Tooth #25-32 D4341  Periodontal scaling and root planing,
+                    four or more teeth per quadrant
+                    Note: lower right quadrant
+
+--------------------------------------------------------------
+VISIT 2 — Periodontal therapy, left side (urgent priority)
+--------------------------------------------------------------
+Tooth #9-16  D4341  Periodontal scaling and root planing,
+                    four or more teeth per quadrant
+                    Note: upper left quadrant
+
+Tooth #17-24 D4341  Periodontal scaling and root planing,
+                    four or more teeth per quadrant
+                    Note: lower left quadrant
+
+--------------------------------------------------------------
+VISIT 3 — Re-evaluation (moderate priority)
+--------------------------------------------------------------
+Tooth N/A  D0171   Re-evaluation, post-operative visit
+                   Note: full-mouth probing, six weeks after therapy
+
+Tooth N/A  D4910   Periodontal maintenance
+                   Note: begin three-month recall interval
+
+--------------------------------------------------------------
+NOTES FOR THE PATIENT
+--------------------------------------------------------------
+A deep cleaning is planned in two halves — right side first, then left.
+Six weeks later the gums are re-measured to see how they responded, and
+cleanings move to a three-month schedule.
+
+SYNTHETIC SAMPLE — NOT A REAL PATIENT.
