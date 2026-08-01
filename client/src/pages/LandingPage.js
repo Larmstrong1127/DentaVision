@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PhiNotice from '../components/shared/PhiNotice';
 
 export default function LandingPage() {
   return (
@@ -16,7 +17,7 @@ export default function LandingPage() {
         <div style={{ display:'flex', gap:'12px', alignItems:'center' }}>
           <Link to="/login" className="btn btn-ghost btn-sm">Sign in</Link>
           <Link to="/request-demo" className="btn btn-secondary btn-sm">Request a Demo</Link>
-          <Link to="/register/clinic" className="btn btn-primary btn-sm">Start free trial</Link>
+          <Link to="/register/clinic" className="btn btn-primary btn-sm">Explore the demo</Link>
         </div>
       </nav>
 
@@ -24,6 +25,9 @@ export default function LandingPage() {
       <section style={{ maxWidth:'900px', margin:'0 auto', padding:'80px 20px 60px', textAlign:'center' }}>
         <div className="badge badge-teal" style={{ marginBottom:'20px', fontSize:'0.8125rem' }}>
           For dental clinics & their patients
+        </div>
+        <div style={{ maxWidth:'620px', margin:'0 auto 24px' }}>
+          <PhiNotice />
         </div>
         <h1 style={{ fontSize:'clamp(2rem,5vw,3.5rem)', lineHeight:'1.15', marginBottom:'20px', color:'var(--ink)' }}>
           Turn treatment plans into<br/>
@@ -34,7 +38,7 @@ export default function LandingPage() {
         </p>
         <div style={{ display:'flex', gap:'12px', justifyContent:'center', flexWrap:'wrap' }}>
           <Link to="/register/clinic" className="btn btn-primary btn-lg">
-            Start 14-day free trial →
+            Explore the interactive demo →
           </Link>
           <Link to="/request-demo" className="btn btn-secondary btn-lg">
             Request a Demo
@@ -43,7 +47,9 @@ export default function LandingPage() {
             I'm a patient
           </Link>
         </div>
-        <p style={{ fontSize:'0.8125rem', color:'var(--ink-tertiary)', marginTop:'14px' }}>No credit card required. 14-day free trial.</p>
+        <p style={{ fontSize:'0.8125rem', color:'var(--ink-tertiary)', marginTop:'14px' }}>
+          No credit card required. Demo accounts are for evaluation with sample or clearly fictional data only.
+        </p>
       </section>
 
       {/* Features */}
@@ -52,12 +58,12 @@ export default function LandingPage() {
           <h2 style={{ textAlign:'center', marginBottom:'40px', fontSize:'2rem' }}>Everything in one platform</h2>
           <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(260px,1fr))', gap:'20px' }}>
             {[
-              { icon:'🔍', title:'AI plan scanning', desc:'Photograph or upload any printed treatment plan. Our AI reads CDT codes and maps findings to a visual tooth chart in seconds.' },
+              { icon:'🔍', title:'AI plan scanning', desc:'Upload a sample printed treatment plan — or enter procedures by hand. Our AI reads CDT codes and maps findings to a visual tooth chart in seconds. Demo only: no real patient information.' },
               { icon:'🦷', title:'3-angle tooth chart', desc:'Arch, front, and side views of all 32 teeth, color-coded by urgency. Patients instantly see what needs attention and why.' },
               { icon:'🎓', title:'Patient education AI', desc:'Patients ask questions in plain language and get warm, clear answers about their procedures — reducing anxiety and improving acceptance.' },
               { icon:'📊', title:'Clinic analytics', desc:'Track treatment acceptance rates, patient engagement, and revenue from accepted plans — all in your clinic dashboard.' },
               { icon:'🔗', title:'Clinic registration codes', desc:'Give patients your unique code. They sign up, link to your clinic, and see their charts on any device.' },
-              { icon:'💳', title:'Simple subscription billing', desc:'Starter at $79/mo or Growth at $199/mo. Cancel any time. Scale as your clinic grows.' },
+              { icon:'💳', title:'Planned subscription pricing', desc:'Starter at $79/mo or Growth at $199/mo once DentaVision is generally available. The demo is free and no card is collected.' },
             ].map(f => (
               <div key={f.title} className="card">
                 <div style={{ fontSize:'1.75rem', marginBottom:'10px' }}>{f.icon}</div>
@@ -71,8 +77,10 @@ export default function LandingPage() {
 
       {/* Pricing */}
       <section style={{ padding:'60px 20px', maxWidth:'700px', margin:'0 auto' }}>
-        <h2 style={{ textAlign:'center', marginBottom:'8px' }}>Simple pricing</h2>
-        <p style={{ textAlign:'center', color:'var(--ink-secondary)', marginBottom:'36px' }}>All plans include a 14-day free trial</p>
+        <h2 style={{ textAlign:'center', marginBottom:'8px' }}>Planned pricing</h2>
+        <p style={{ textAlign:'center', color:'var(--ink-secondary)', marginBottom:'36px' }}>
+          Every plan starts with the free demo, which runs on sample data
+        </p>
         <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:'16px' }}>
           {[
             { plan:'Starter', price:79, features:['Up to 50 patients/mo','AI plan scanning','Patient education','Email support'] },
@@ -91,7 +99,7 @@ export default function LandingPage() {
                 </div>
               ))}
               <Link to="/register/clinic" className={`btn btn-${p.featured ? 'primary' : 'secondary'}`} style={{ width:'100%', marginTop:'16px', display:'block', textAlign:'center' }}>
-                Start free trial
+                Explore the demo
               </Link>
             </div>
           ))}
@@ -102,6 +110,10 @@ export default function LandingPage() {
       <footer style={{ borderTop:'1px solid var(--border)', padding:'30px 20px', textAlign:'center' }}>
         <p style={{ fontSize:'0.875rem', color:'var(--ink-tertiary)' }}>
           © {new Date().getFullYear()} DentaVision · Built for dental professionals and their patients
+        </p>
+        <p style={{ fontSize:'0.8125rem', color:'var(--ink-tertiary)', marginTop:'8px', maxWidth:'620px', margin:'8px auto 0', lineHeight:'1.6' }}>
+          Demonstration software. Do not upload real patient information (PHI). HIPAA-covered use
+          requires a signed Business Associate Agreement, which DentaVision does not currently offer.
         </p>
       </footer>
     </div>

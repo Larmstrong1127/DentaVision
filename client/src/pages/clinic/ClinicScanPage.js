@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ClinicNav } from '../../components/shared/NavBar';
+import PhiNotice from '../../components/shared/PhiNotice';
 import api from '../../utils/api';
 
 // ── CDT surface requirement map ───────────────────────────────
@@ -562,6 +563,9 @@ function ConfirmModal({ patientName, patientStatus, onConfirm, onCancel, loading
           )}
         </div>
 
+        {/* Demo / PHI reminder — last checkpoint before anything is submitted */}
+        <PhiNotice compact style={{ marginBottom: '16px' }} />
+
         {/* Scans remaining notice */}
         {scansRemainingToday !== undefined && (
           <p style={{
@@ -716,9 +720,12 @@ export default function ClinicScanPage() {
             Scan treatment plan
           </h1>
           <p style={{ color: 'var(--ink-tertiary)', fontSize: '0.9rem' }}>
-            Upload a photo or PDF, or enter procedures manually — AI will build a visual chart for your patient.
+            Upload a sample plan photo or PDF, or enter procedures manually — AI will build a visual chart.
           </p>
         </div>
+
+        {/* Demo / PHI notice — must stay above the upload surface, not in a footer */}
+        <PhiNotice style={{ marginBottom: '20px' }} />
 
         {result ? (
           /* ── Result view ── */
@@ -838,6 +845,7 @@ export default function ClinicScanPage() {
             {inputMode === 'upload' && (
               <div className="form-group">
                 <label className="form-label">Treatment plan image or PDF</label>
+                <PhiNotice compact style={{ marginBottom: '10px' }} />
                 <div
                   onDragOver={e => { e.preventDefault(); setDragging(true); }}
                   onDragLeave={() => setDragging(false)}
@@ -862,9 +870,9 @@ export default function ClinicScanPage() {
                   ) : (
                     <>
                       <p style={{ fontSize: '2.5rem', marginBottom: '10px' }}>📄</p>
-                      <p style={{ fontWeight: '500', marginBottom: '4px' }}>Drop file here or click to upload</p>
+                      <p style={{ fontWeight: '500', marginBottom: '4px' }}>Drop a sample plan here or click to upload</p>
                       <p style={{ fontSize: '0.8125rem', color: 'var(--ink-tertiary)' }}>
-                        JPG, PNG, WebP, or PDF · Max 10MB
+                        JPG, PNG, WebP, or PDF · Max 10MB · Sample data only — no real PHI
                       </p>
                     </>
                   )}
@@ -878,6 +886,7 @@ export default function ClinicScanPage() {
                 <label className="form-label" style={{ marginBottom: '12px', display: 'block' }}>
                   Enter procedures
                 </label>
+                <PhiNotice compact style={{ marginBottom: '12px' }} />
                 <StructuredPlanForm visits={visits} setVisits={setVisits} />
               </div>
             )}
@@ -888,8 +897,10 @@ export default function ClinicScanPage() {
               borderRadius: 'var(--r-md)', padding: '12px 14px', marginBottom: '20px'
             }}>
               <p style={{ fontSize: '0.8125rem', color: 'var(--watch)', lineHeight: '1.6' }}>
-                <strong>AI scanning:</strong> Claude reads CDT codes, tooth numbers, and procedure notes.
-                Review all results before sharing with your patient. Scanning typically takes 5–15 seconds.
+                <strong>AI scanning:</strong> whatever you submit is sent to Anthropic's Claude API for
+                parsing, so it must not contain real patient information. Claude reads CDT codes, tooth
+                numbers, and procedure notes; review all results before relying on them. Scanning
+                typically takes 5–15 seconds.
               </p>
             </div>
 
