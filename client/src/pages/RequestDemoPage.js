@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import PhiNotice from '../components/shared/PhiNotice';
 import api from '../utils/api';
 
 const PROVIDER_OPTIONS = ['1', '2-5', '6-10', '10+'];
@@ -156,6 +157,8 @@ export default function RequestDemoPage() {
                     />
                   </div>
                 </div>
+
+                <PhiNotice compact style={{ marginTop: '4px', marginBottom: '8px' }} />
 
                 <button
                   type="submit"

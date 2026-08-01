@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import PhiNotice from '../components/shared/PhiNotice';
 import api from '../utils/api';
 
 export default function RegisterClinicPage() {
@@ -37,8 +38,10 @@ export default function RegisterClinicPage() {
       </Link>
 
       <div className="card" style={{ width:'100%', maxWidth:'460px' }}>
-        <h2 style={{ fontFamily:'var(--font-sans)', fontWeight:'600', fontSize:'1.25rem', marginBottom:'4px' }}>Register your clinic</h2>
-        <p style={{ fontSize:'0.875rem', color:'var(--ink-tertiary)', marginBottom:'20px' }}>14-day free trial · No credit card required</p>
+        <h2 style={{ fontFamily:'var(--font-sans)', fontWeight:'600', fontSize:'1.25rem', marginBottom:'4px' }}>Create a demo clinic account</h2>
+        <p style={{ fontSize:'0.875rem', color:'var(--ink-tertiary)', marginBottom:'16px' }}>Free evaluation account · No credit card required</p>
+
+        <PhiNotice />
 
         {error && <div className="alert alert-error">{error}</div>}
 
@@ -68,12 +71,12 @@ export default function RegisterClinicPage() {
 
           <div style={{ background:'var(--teal-light)', border:'1px solid rgba(15,123,108,0.2)', borderRadius:'var(--r-md)', padding:'12px 14px', marginBottom:'16px' }}>
             <p style={{ fontSize:'0.8125rem', color:'var(--teal-dark)' }}>
-              After registering, you'll receive a unique <strong>clinic code</strong> to share with your patients so they can link their accounts to your practice.
+              After registering, you'll receive a unique <strong>clinic code</strong>. In a live deployment this is how patients link their accounts to your practice; in the demo, use it to walk through the patient experience yourself.
             </p>
           </div>
 
           <button type="submit" className="btn btn-primary" style={{ width:'100%' }} disabled={loading}>
-            {loading ? <><span className="spinner" style={{width:'16px',height:'16px'}} /> Creating account…</> : 'Create clinic account →'}
+            {loading ? <><span className="spinner" style={{width:'16px',height:'16px'}} /> Creating account…</> : 'Create demo clinic account →'}
           </button>
         </form>
 

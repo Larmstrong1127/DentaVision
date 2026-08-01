@@ -76,7 +76,7 @@ export default function LoginPage() {
 
         <p style={{ textAlign:'center', fontSize:'0.875rem', color:'var(--ink-tertiary)', marginTop:'16px' }}>
           {role === 'clinic' ? (
-            <>No account? <Link to="/register/clinic">Start free trial</Link></>
+            <>No account? <Link to="/register/clinic">Create a demo clinic account</Link></>
           ) : (
             <>No account? <Link to="/register/patient">Create patient account</Link></>
           )}

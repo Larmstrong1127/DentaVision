@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import PhiNotice from '../components/shared/PhiNotice';
 import api from '../utils/api';
 
 export default function RegisterPatientPage() {
@@ -36,7 +37,9 @@ export default function RegisterPatientPage() {
 
       <div className="card" style={{ width:'100%', maxWidth:'440px' }}>
         <h2 style={{ fontFamily:'var(--font-sans)', fontWeight:'600', fontSize:'1.25rem', marginBottom:'4px' }}>Create your account</h2>
-        <p style={{ fontSize:'0.875rem', color:'var(--ink-tertiary)', marginBottom:'20px' }}>View your treatment plan and learn about your dental care</p>
+        <p style={{ fontSize:'0.875rem', color:'var(--ink-tertiary)', marginBottom:'16px' }}>View your treatment plan and learn about your dental care</p>
+
+        <PhiNotice />
 
         {urlCode && (
           <div className="alert alert-success" style={{ marginBottom:'16px' }}>
