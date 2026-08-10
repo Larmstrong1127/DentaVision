@@ -2,7 +2,19 @@
 
 [![CI/CD](https://github.com/Larmstrong1127/DentaVision/actions/workflows/ci.yml/badge.svg)](https://github.com/Larmstrong1127/DentaVision/actions/workflows/ci.yml)
 
-An **AI-powered dental treatment planning platform** that bridges the gap between clinic workflows and patient understanding. Clinics upload treatment plan images; Claude AI parses them into prioritized, visit-by-visit schedules that patients can review, confirm, and ask questions about. **This is a demo product — see the PHI notice below before using it with any real data.**
+A **patient-facing companion layer for dental treatment plans.** DentaVision is not
+practice-management software and does not try to replace it — it sits alongside whatever
+system a clinic already runs. A coordinator scans, uploads, or enters the treatment plan
+the practice has already produced; Claude AI parses it into plain language; and the patient
+gets one simple view of what is recommended, what is urgent, what each procedure is for,
+and what they have already had done.
+
+**The wedge is the upload.** Integrating with practice-management systems means negotiating
+access with a vendor before you can serve a single clinic. Starting from a scan or an upload
+means a practice can adopt this on its own, today, without anyone's permission — at the cost
+of a manual step the coordinator was already performing.
+
+**This is a demo product — see the PHI notice below before using it with any real data.**
 
 **Developer:** Landon Armstrong
 **GitHub:** [Larmstrong1127](https://github.com/Larmstrong1127)
