@@ -21,6 +21,11 @@ of a manual step the coordinator was already performing.
 **Email:** Landon.Armstrong@stmartin.edu
 
 > 🚀 **[Live Demo →](https://denta-vision.vercel.app)**
+>
+> **Demo accounts** (sample data only): clinic `demo@dentavision.app` / `DemoClinic2026!` ·
+> patient `patient@dentavision.app` / `DemoPatient2026!` · clinic code `DEMO2026`.
+> Seed or refresh them with `node server/scripts/seed-demo.js` (idempotent; reads `MONGODB_URI`).
+> First request may take ~20s while the free-tier backend wakes up.
 
 ---
 
