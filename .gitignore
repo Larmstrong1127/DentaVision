@@ -29,3 +29,11 @@ desktop.ini
 # Editor directories
 .vscode/
 .idea/
+
+# Internal business analysis — MUST NOT be published.
+# This repository is PUBLIC. The savings model, pricing deliberation and defect
+# audit live in venture-deck (local-only) precisely so a prospect cannot read
+# them. This entry exists because the file sat untracked and un-ignored here,
+# one `git add -A` from publication. Structural enforcement, not discipline.
+DENTAVISION_BUSINESS_ANALYSIS*.md
+ANALYSIS_DEFECTS.md
