@@ -22,6 +22,10 @@ of a manual step the coordinator was already performing.
 
 > 🚀 **[Live Demo →](https://denta-vision.vercel.app)**
 >
+> **The demo database is currently offline, so these logins will not work** — the
+> frontend and API are up, but the clinic lookup times out until the Atlas cluster
+> is resumed and `server/scripts/seed-demo.js` is re-run.
+>
 > **Demo accounts** (sample data only): clinic `demo@dentavision.app` / `DemoClinic2026!` ·
 > patient `patient@dentavision.app` / `DemoPatient2026!` · clinic code `DEMO2026`.
 > Seed or refresh them with `node server/scripts/seed-demo.js` (idempotent; reads `MONGODB_URI`).
