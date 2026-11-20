@@ -77,6 +77,11 @@ async function main() {
     address: { street: '100 Demo Way', city: 'Issaquah', state: 'WA', zip: '98029' },
     website: 'https://denta-vision.vercel.app',
     registrationCode: 'DEMO2026',
+    // Admin approval was added after this script; an unapproved demo clinic
+    // cannot log in (403 "pending admin approval").
+    status: 'approved',
+    // A long trial so the demo never locks itself after the default trial ends.
+    subscription: { status: 'trial', trialEndsAt: new Date(Date.now() + 365 * 24 * 60 * 60 * 1000) },
   });
   await clinic.save();
   console.log(`clinic seeded: ${CLINIC_EMAIL} (code ${clinic.registrationCode})`);
